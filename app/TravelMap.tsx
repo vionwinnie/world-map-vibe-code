@@ -26,11 +26,10 @@ export default function TravelMap() {
   const [sidebarComment, setSidebarComment] = useState<string>("");
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
   useEffect(() => {
     // Fetch travel data
-    fetch(`${basePath}/data/travel-data.json`)
+    fetch('/data/travel-data.json')
       .then(res => res.json())
       .then(data => setTravelData(data));
 
@@ -56,7 +55,7 @@ export default function TravelMap() {
       setSidebarComment("");
       return;
     }
-    const commentFile = `${basePath}/comments/${sidebar.iso}.txt`;
+    const commentFile = `/comments/${sidebar.iso}.txt`;
     fetch(commentFile)
       .then((res) => {
         if (!res.ok) throw new Error("No comment");
@@ -172,7 +171,7 @@ export default function TravelMap() {
             {travelData[hovered].photos.map((p, i) => (
               <img
                 key={i}
-                src={`${basePath}${p}`}
+                src={p}
                 alt={hovered + " photo"}
                 style={{ width: 60, height: 60, objectFit: 'cover', borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
               />
@@ -209,7 +208,7 @@ export default function TravelMap() {
             {travelData[sidebar.iso]?.photos.map((p, i) => (
               <img
                 key={i}
-                src={`${basePath}${p}`}
+                src={p}
                 alt={sidebar.iso + " photo"}
                 style={{ width: '100%', borderRadius: 10, marginBottom: 8 }}
               />
