@@ -9,6 +9,6 @@ if ! command -v gh-pages &> /dev/null; then
   npm install --save-dev gh-pages
 fi
 
-gh-pages -d out
+npx gh-pages -d out
 
 echo "Deployed to GitHub Pages!" 
